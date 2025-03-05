@@ -1,37 +1,45 @@
 
 signos = '.,:¿?;:"'
-texto = input("\nIngresa texto para realizar el conteo\n")
-texto = texto.lower()
-cantidad_palabras = {}
 
-#Elimina los signos
-for signo in signos:
-    texto = texto.replace(signo, "")
+while True:
+    texto = input("\nIngresa texto para realizar el conteo\n")
+    texto = texto.lower()
+    cantidad_palabras = {}
 
-#Separa las palabras
-palabras = texto.split()
+    #Elimina los signos
+    for signo in signos:
+        texto = texto.replace(signo, "")
 
-#Hace el conteo de las palabras
-for palabra in palabras:
-    cantidad_palabras[palabra] = cantidad_palabras.get(palabra, 0) + 1
+    #Separa las palabras
+    palabras = texto.split()
 
-#Ordena las palabras de mayor a menor
-palabras_ordenadas = sorted(cantidad_palabras.items(), key=lambda x: x[1], reverse=True)
+    #Hace el conteo de las palabras
+    for palabra in palabras:
+        cantidad_palabras[palabra] = cantidad_palabras.get(palabra, 0) + 1
 
-#Identifica la palabra mas usada
-if palabras_ordenadas:
-    max_usada, max_cantidad = palabras_ordenadas[0]
-else:
-    max_usada, max_cantidad = "No hay palabras", 0
+    #Ordena las palabras de mayor a menor
+    palabras_ordenadas = sorted(cantidad_palabras.items(), key=lambda x: x[1], reverse=True)
 
-#impresion de los resultados
-print(f"\n📊 Texto sin signos: {texto}")
-print(f"✅ Total de palabras: {len(palabras)}")
-print(f"\n📌 Frecuencia de palabras:")
+    #Identifica la palabra mas usada
+    if palabras_ordenadas:
+        max_usada, max_cantidad = palabras_ordenadas[0]
+    else:
+        max_usada, max_cantidad = "No hay palabras", 0
 
-#enumera e imprime la cantidad de palabras
-for i, (palabra, cantidad) in enumerate(palabras_ordenadas, start=1):
-    print(f"{i}. '{palabra}' → {cantidad} veces")
+    #impresion de los resultados
+    print(f"\n📊 Texto sin signos: {texto}")
+    print(f"✅ Total de palabras: {len(palabras)}")
+    print(f"\n📌 Frecuencia de palabras:")
 
-print(f"\n🔥 La palabra más usada es: '{max_usada}' con {max_cantidad} repeticiones.")
+    #enumera e imprime la cantidad de palabras
+    for i, (palabra, cantidad) in enumerate(palabras_ordenadas[:3], start=1):
+        print(f"{i}. '{palabra}' → {cantidad} veces")
+
+    print(f"\n🔥 La palabra más usada es: '{max_usada}' con {max_cantidad} repeticiones.")
+
+
+    seleccion = input("\nQuieres Realizar otro conteo? (s/n):").lower()
+    if seleccion != 's':
+        print("👋 ¡Gracias por jugar! Hasta la próxima. 😊")
+        break
 
